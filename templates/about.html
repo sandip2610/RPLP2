@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'sdfg.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .about-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .about-container h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .about-container p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="about-container">
+        <h1>About Us</h1>
+        <p>Welcome to IDEAL EDUCATION</p>
+        <p>At IDEAL EDUCATION we are committed to shaping the future through transformative education. Founded on the principles of academic excellence, innovation, and community service, our institute provides a dynamic learning environment that nurtures intellectual growth and holistic development.</p>
+        <p>Our mission is to empower students with the knowledge, skills, and values necessary to succeed in an ever-changing world. We offer a wide range of programs across disciplines, led by a team of dedicated and experienced educators who bring real-world insights into the classroom.</p>
+        <p>We believe in fostering a culture of inclusivity and collaboration, where every student feels supported and inspired to reach their highest potential. Our state-of-the-art facilities, combined with cutting-edge technology and a student-centered approach, ensure that learning goes beyond textbooks and into the realm of practical, hands-on experience.</p>
+        <p>At IDEAL EDUCATION we aim not just to educate, but to create leaders, innovators, and responsible global citizens who will contribute positively to society. Join us in our pursuit of excellence and become part of a vibrant academic community that is dedicated to making a difference.</p>
+        <p>Thank you for visiting IDEAL EDUCATION!</p>
+    </div>
+</body>
+</html>

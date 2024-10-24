@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Home | Ideal Education{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        /* Navigation Bar Styles */
+        .navbar {
+            background-color: #0056b3;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-left {
+            float: left;
+        }
+
+        .nav-right {
+            float: right;
+        }
+
+        .nav-logo {
+            color: white;
+            text-decoration: none;
+            font-size: 35px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .nav-logo {
+            width: 30px;
+            height: 40px;
+        }
+
+        .nav-right ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-right ul li {
+            display: inline;
+            margin-left: 25px;
+        }
+
+        .nav-right ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 5px 10px;
+            transition: color 0.3s ease;
+        }
+        .nav-right ul li a:hover {
+            color: #ffcc00;
+        }
+
+        /* Clear floats */
+        .container::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Hero section */
+        .hero {
+            background: url("{% static 'Main Image.jpg' %}") no-repeat center center/cover;
+            height: 400px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Background overlay to enhance text visibility */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 0;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-top: 10px;
+            max-width: 700px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Button styling */
+        .btn {
+            background-color: #ffcc00;
+            color: #0056b3;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background-color: #e6b800;
+        }
+
+        .content {
+            padding: 50px 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-top: -50px;
+            position: relative;
+            z-index: 2;
+        }
+
+        footer {
+            background-color: #0056b3;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-right ul li {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+        }
+        <--add-->
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .map-container {
+            width: 100%;
+            height: 500px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        <-- add -->
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .notice-board {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 5px solid #333;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .notice-board h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .notice {
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            padding: 10px;
+            margin-bottom: 15px;
+            display: block;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .notice-header {
+            margin-bottom: 10px;
+        }
+
+        .notice-header .date {
+            font-weight: bold;
+            color: #2196F3;
+            font-size: 0.9rem;
+        }
+
+        .notice p {
+            margin: 0;
+            color: #333;
+        }
+
+        .notice strong {
+            color: #000;
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-left">
+                <img src="{% static 'logo.png' %}" alt="Logo" width="50" height="40"/>
+
+                <a href="{% url 'home' %}" class="nav-logo">Ideal Education</a>
+            </div>
+            <div class="nav-right">
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'register' %}">Admission</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Ideal Education</h1>
+            <p>Providing quality education to empower your future.</p>
+            <a href="{% url 'register' %}" class="btn">ADMISSION</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+    <div>
+        <p></p>
+    </div>
+    <div class="container">
+        <img src="{% static 'th.jpeg' %}" alt="Left Image" width="395" height="250">
+        <img src="{% static 'logo.jpg' %}" alt="Center Image" width="395" height="250">
+        <img src="{% static 'How-do-I-create-a-Computer-program.jpg' %}" alt="Right Image" width="395" height="250">
+    </div>
+    <div>
+        <p></p>
+    </div>
+    <div class="notice-board">
+        <h1>Notice Board</h1>
+        <div class="notice">
+            <div class="notice-header">
+                <span class="date">NEW</span>
+            </div>
+            <ol>
+                {% for notice in notices %}
+                <li>(Date: {{ notice.date }})  {{ notice.notice }}</li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+
+    <h1>Location</h1>
+    <div class="map-container">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.145737502188!2d87.20662501497386!3d22.90067898501401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f8cf95d63f1e23%3A0xfefc6818d7a2bda1!2sAmakonda%2C%20Simlapal%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1697988586485!5m2!1sen!2sin"
+            allowfullscreen="" loading="lazy">
+        </iframe>
+    </div>
+
+    <footer>
+        <p>Ideal Education</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'boock.jpg'%}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .contact-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            max-width: 600px;
+            margin: 50px auto;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-container h2 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .contact-info p strong {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-container">
+        <h2>Contact Us</h2>
+        <p>If you have any questions, feel free to reach out to us.</p>
+
+        <div class="contact-info">
+            <p><strong>Phone Number:</strong> +91 8391831592</p>
+            <p><strong>Email:</strong> sandipmandal2610@gmail.com</p>
+        </div>
+    </div>
+</body>
+</html>
