@@ -23,16 +23,17 @@
 
         .registration-container {
             background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 500px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+            width: 550px;
             text-align: center;
         }
 
         h2 {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            font-size: 1.5em;
         }
 
         form {
@@ -43,28 +44,29 @@
 
         label {
             display: block;
-            margin: 20px 0 5px;
+            margin: 10px 0 5px;
             text-align: left;
             width: 100%;
+            font-size: 0.9em;
         }
 
-        input[type="text"], input[type="email"], input[type="number"], input[type="password"], input[type="date"] {
+        input[type="text"], input[type="email"], input[type="number"], input[type="password"], input[type="date"], input[type="file"], select {
             width: 100%;
-            max-width: 600px;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 2px solid #ccc;
+            padding: 6px;
+            margin-bottom: 8px;
+            border: 1px solid #ccc;
             border-radius: 4px;
+            font-size: 0.9em;
         }
 
         button {
             width: 100%;
-            max-width: 400px;
-            padding: 10px;
+            padding: 8px;
             background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 4px;
+            font-size: 1em;
             cursor: pointer;
         }
 
@@ -78,7 +80,7 @@
 <div class="registration-container">
     <h2>Register</h2>
 
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" placeholder="Enter your name">
@@ -89,11 +91,21 @@
         <label for="phone_number">Phone Number:</label>
         <input type="text" id="phone_number" name="phone_number" placeholder="Enter your phone number">
 
-        <label for="dob">Age</label>
+        <label for="dob">Age:</label>
         <input type="date" id="dob" name="dob" placeholder="Enter your date of birth">
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
 
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" placeholder="Enter your password">
+
+        <label for="photo">Profile Photo:</label>
+        <input type="file" id="photo" name="photo">
 
         <button type="submit">Register</button>
     </form>

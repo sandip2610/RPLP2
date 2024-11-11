@@ -1,17 +1,20 @@
 from django import forms
 from .models import Student
 from .models import NoticeBoard
+from .models import Contact
 
 class StudentRegistrationForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ['name', 'email', 'phone_number', 'dob', 'password']
+        fields = ['name', 'email', 'phone_number', 'gender', 'dob', 'photo','password']
 
         labels = {
             'name': 'name',
             'email': 'email',
             'mobile_number': 'mobile_number',
+            'gender': 'gender',
             'dob': 'dob',
+            'photo': 'photo',
             'password': 'password',
         }
         widgets = {
@@ -31,3 +34,15 @@ class NoticeBoardForm(forms.ModelForm):
             'notice': 'notice',
             'data': 'data',
         }
+
+class EditProfileForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput, required=False)
+
+    class Meta:
+        model = Student
+        fields = ['name', 'email', 'dob', 'phone_number', 'gender', 'photo', 'password']
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['name', 'email', 'subject', 'message']

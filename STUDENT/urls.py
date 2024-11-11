@@ -9,5 +9,8 @@ urlpatterns = [
     path('san/', views.san, name='san' ),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('about/', views.about, name='about'),
-    path('contact/', views.contact, name='contact'),
+    path('contact/', views.contact_view, name='contact'),
+    path('profile/', views.profile, name='profile'),
+    path('profile/edit/<int:student_id>/', views.edit_profile, name='edit_profile'),
+    path('success/', views.success_view, name='success'),
 ]
