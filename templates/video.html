@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eef2f3;
+            color: #222;
+        }
+        /* Navbar Styles */
+        .navbar {
+            width: 100%;
+            background-color: #0056b3;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar .logo-section {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .logo-section img {
+            height: 50px;
+            margin-right: 15px;
+        }
+        .navbar .logo-section .institute-name {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .navbar .nav-links {
+            display: flex;
+        }
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 20px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .navbar .nav-links a:hover {
+            color: #ffcc00;
+        }
+        .container {
+            padding: 75px 30px 30px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #0044cc;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+        .video-card {
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            height: 325px;
+        }
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .video-card h2 {
+            margin-top: 0;
+            color: #333;
+            font-size: 1.2em;
+        }
+        video {
+            width: 100%;
+            height: 75%; /* Reduced height */
+            border-radius: 10px;
+            margin-top: 5px;
+        }
+        p {
+            color: #555;
+            line-height: 1.4; /* Adjusted line-height */
+            font-size: 0.9em;
+        }
+        /* Chat Icon Styles */
+        .chat-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #28a745;
+            color: white;
+            font-size: 24px;
+            padding: 15px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .chat-icon:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo-section">
+            <img src="{% static 'logo.png' %}" alt="Institute Logo">
+            <span class="institute-name">Ideal Education</span>
+        </div>
+        <div class="nav-links">
+            <a href="home">Home</a>
+            <a href="video">Content</a>
+            <a href="profile">Profile</a>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Video Content</h1>
+        <div class="video-grid">
+            {% for video in videos %}
+            <div class="video-card">
+                <h2>{{ video.title }}</h2>
+                <p>{{ video.description }}</p>
+                <video controls>
+                    <source src="{{ video.video_file.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+<div class="chat-icon" onclick="window.location.href='{% url 'chat_board' %}'">💬</div>
+</body>
+</html>

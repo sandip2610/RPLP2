@@ -32,33 +32,28 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .nav-left {
             display: flex;
             align-items: center;
         }
-
         .nav-logo {
             color: white;
             text-decoration: none;
-            font-size: 35px;
+            font-size: 25px;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-left: 10px;
         }
-
         .nav-right ul {
             display: flex;
             list-style-type: none;
             margin: 0;
             padding: 0;
         }
-
         .nav-right ul li {
             margin-left: 25px;
         }
-
         .nav-right ul li a {
             color: white;
             text-decoration: none;
@@ -67,21 +62,35 @@
             padding: 5px 10px;
             transition: color 0.3s ease;
         }
-
         .nav-right ul li a:hover {
             color: #ffcc00;
         }
-
-
+        .auth-links {
+            display: flex;
+            gap: 15px;
+        }
+        .auth-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 8px 12px;
+            border: 1px solid white;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .auth-links a:hover {
+            background-color: white;
+            color: #0056b3;
+        }
         h1 {
             text-align: center;
             color: #4CAF50;
             margin-top: 20px;
             font-size: 2.5em;
         }
-
         .container {
-            max-width: 1000px;
+            max-width: 1300px;
             margin: 0 auto;
             padding: 20px;
             display: flex;
@@ -89,34 +98,29 @@
             gap: 30px;
             justify-content: center;
         }
-
         /* Contact form styling */
         .contact-form {
             flex: 1;
             background-color: #f0f8ff;
-            padding: 25px;
+            padding: 15px;
             border-radius: 12px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
-
         .contact-form:hover {
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
-
         .contact-form h2 {
             color: #333366;
             margin-bottom: 20px;
             font-size: 1.8em;
         }
-
         .contact-form label {
             display: block;
             margin-top: 10px;
             font-weight: bold;
             color: #333;
         }
-
         .contact-form input,
         .contact-form textarea {
             width: 95%;
@@ -124,16 +128,14 @@
             margin-top: 8px;
             border: 1px solid #ccc;
             border-radius: 6px;
-            font-size: 1.1em;
+            font-size: 1em;
             background-color: #fafafa;
         }
-
         .contact-form input:focus,
         .contact-form textarea:focus {
             outline: none;
             border-color: #4CAF50;
         }
-
         .contact-form button {
             display: block;
             width: 100%;
@@ -148,11 +150,9 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-
         .contact-form button:hover {
             background-color: #45a049;
         }
-
         /* Contact information styling */
         .contact-info {
             flex: 1;
@@ -164,23 +164,19 @@
             border: 2px solid #4CAF50;
             background-image: linear-gradient(to right, #e8f5e9, #dcedc8);
         }
-
         .contact-info h2 {
             color: #333366;
             margin-bottom: 20px;
             font-size: 1.8em;
         }
-
         .contact-info p {
             font-size: 1.1em;
             line-height: 2.2;
             color: #555;
         }
-
         .contact-info .info-item {
             margin-bottom: 15px;
         }
-
         .contact-info .info-item strong {
             color: #4CAF50;
             font-size: 2.2em;
@@ -196,14 +192,15 @@
     <div class="nav-right">
         <ul>
             <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'register' %}">Admission</a></li>
-            <li><a href="{% url 'login' %}"> Login</a><li>
             <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'contact' %}">Contact Us</a></li>
         </ul>
     </div>
+    <div class="auth-links">
+        <a href="{% url 'login' %}">Sign In</a>
+        <a href="{% url 'register' %}">Sign Up</a>
+    </div>
 </nav>
-
 <h1>Contact</h1>
 <div class="container">
     <div class="contact-form">
@@ -212,20 +209,15 @@
             {% csrf_token %}
             <label for="name">Name</label>
             <input type="text" id="name" name="name" required>
-
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required>
-
             <label for="subject">Subject</label>
             <input type="text" id="subject" name="subject" required>
-
             <label for="message">Message</label>
             <textarea id="message" name="message" rows="5" required></textarea>
-
             <button type="submit">Send Message</button>
         </form>
     </div>
-
     <div class="contact-info">
         <h2>Contact Information</h2>
         <div class="info-item">
@@ -239,6 +231,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

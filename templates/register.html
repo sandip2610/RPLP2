@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
+    <title>Register</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <style>
@@ -13,35 +13,32 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-color: #f0f0f0;
+            height: 100vh;
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
         }
-
         .registration-container {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-            width: 550px;
+            background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+            backdrop-filter: blur(10px); /* Blurry effect */
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            width: 100%;
+            max-width: 550px;
             text-align: center;
         }
-
         h2 {
             text-align: center;
             margin-bottom: 10px;
             font-size: 1.5em;
         }
-
         form {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-
         label {
             display: block;
             margin: 10px 0 5px;
@@ -49,19 +46,18 @@
             width: 100%;
             font-size: 0.9em;
         }
-
         input[type="text"], input[type="email"], input[type="number"], input[type="password"], input[type="date"], input[type="file"], select {
             width: 100%;
-            padding: 6px;
-            margin-bottom: 8px;
+            padding: 8px;
+            margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 0.9em;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
         }
-
         button {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             background-color: #4CAF50;
             color: white;
             border: none;
@@ -69,47 +65,41 @@
             font-size: 1em;
             cursor: pointer;
         }
-
         button:hover {
             background-color: #45a049;
+        }
+        .messages {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .success {
+            color: green;
         }
     </style>
 </head>
 <body>
-
-<div class="registration-container">
-    <h2>Register</h2>
-
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" placeholder="Enter your name">
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email">
-
-        <label for="phone_number">Phone Number:</label>
-        <input type="text" id="phone_number" name="phone_number" placeholder="Enter your phone number">
-
-        <label for="dob">Age:</label>
-        <input type="date" id="dob" name="dob" placeholder="Enter your date of birth">
-
-        <label for="gender">Gender:</label>
-        <select id="gender" name="gender">
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-        </select>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password">
-
-        <label for="photo">Profile Photo:</label>
-        <input type="file" id="photo" name="photo">
-
-        <button type="submit">Register</button>
-    </form>
-</div>
-
+    <div class="registration-container">
+        <h2>Register</h2>
+        {% for message in messages %}
+            <p class="messages {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</p>
+        {% endfor %}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="Name"><br>
+            <input type="email" name="email" placeholder="Email"><br>
+            <input type="text" name="phone_number" placeholder="Phone Number"><br>
+            <input type="date" name="dob"><br>
+            <select name="gender">
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select><br>
+            <input type="password" name="password" placeholder="Password"><br>
+            <input type="file" name="photo"><br>
+            <button type="submit">Register</button>
+        </form>
+    </div>
 </body>
 </html>
