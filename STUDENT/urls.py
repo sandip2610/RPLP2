@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
+from .views import notes_list
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -17,6 +18,7 @@ urlpatterns = [
     path('edit_message/<int:message_id>/', views.edit_message, name='edit_message'),
     path('delete_message/<int:message_id>/', views.delete_message, name='delete_message'),  # Add this line
     path('video', views.video_list, name='video'),
+    path('notes/', notes_list, name='notes_list'),
     path('admission/', views.student_admission, name='admission'),
     path('password-reset/', views.password_reset, name='password_reset'),
     path('change-password/', views.change_password, name='change_password'),

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import LoginForm, ContactForm, AdmissionForm, EditProfileForm, PasswordResetForm
-from .models import Student, NoticeBoard, Message, VideoContent, Contact, Admission
+from .models import Student, NoticeBoard, Message, VideoContent, Contact, Admission, Note
 from django.http import HttpResponseForbidden
 from django.core.mail import send_mail
 import random
@@ -136,7 +136,7 @@ def student_admission(request):
             admission.save()
             student.is_admitted = True
             student.save()
-            return redirect('success')
+            return redirect('profile')
     else:
         form = AdmissionForm()
     return render(request, 'student_admission.html', {'form': form, 'student': student})
@@ -221,3 +221,7 @@ def success_view(request):
 def video_list(request):
     videos = VideoContent.objects.all()
     return render(request, 'video.html', {'videos': videos})
+
+def notes_list(request):
+    notes = Note.objects.all()
+    return render(request, 'notes_list.html', {'notes': notes})
