@@ -5,334 +5,620 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Home | Ideal Education{% endblock %}</title>
     {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #f59e0b;
+            --light-color: #f8fafc;
+            --dark-color: #1e293b;
+            --text-color: #334155;
+            --text-light: #64748b;
+        }
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
-            color: #333;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f1f5f9;
         }
         .container {
-            width: 90%;
-            margin: 0 auto;
+            width: 100%;
             max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-        /* Navigation Bar Styles */
+        /* Navigation */
         .navbar {
-            background-color: #0056b3;
-            padding: 10px 20px;
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
         }
-        .nav-left {
-            float: left;
-        }
-        .nav-right {
-            float: right;
+        .nav-container {
             display: flex;
+            justify-content: space-between;
             align-items: center;
         }
         .nav-logo {
-            color: white;
+            display: flex;
+            align-items: center;
             text-decoration: none;
-            font-size: 35px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.5rem;
         }
         .nav-logo img {
-            width: 50px;
             height: 40px;
             margin-right: 10px;
         }
-        .nav-right ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
         }
-        .nav-right ul li {
-            display: inline;
-            margin-left: 5px;
-        }
-        .nav-right ul li a {
-            color: white;
+        .nav-links a {
             text-decoration: none;
-            font-size: 20px;
-            font-weight: bold;
-            padding: 15px 10px;
-            transition: color 0.3s ease;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
         }
-        .nav-right ul li a:hover {
-            color: #ffcc00;
+        .nav-links a:hover {
+            color: var(--primary-color);
         }
-        .auth-links {
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        .auth-buttons {
             display: flex;
             gap: 15px;
         }
-        .auth-links a {
-            color: white;
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
             text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-            padding: 8px 12px;
-            border: 1px solid white;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: all 0.3s;
+            display: inline-block;
         }
-        .auth-links a:hover {
-            background-color: white;
-            color: #0056b3;
+        .btn-outline {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
         }
-        .container::after {
-            content: "";
-            display: table;
-            clear: both;
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
         }
-        /* Hero section */
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: 1px solid var(--primary-color);
+        }
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        /* Hero Section */
         .hero {
-            background: url("{% static 'Main Image.jpg' %}") no-repeat center center/cover;
-            height: 400px;
-            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("{% static 'Main Image.jpg' %}") no-repeat center center/cover;
+            height: 80vh;
+            min-height: 500px;
             display: flex;
-            justify-content: center;
             align-items: center;
-        }
-        /* Background overlay to enhance text visibility */
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1;
+            color: white;
+            text-align: center;
         }
         .hero-content {
-            position: relative;
-            z-index: 2;
-            color: white;
-            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         .hero h1 {
-            font-size: 48px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin: 0;
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
         }
         .hero p {
-            font-size: 18px;
-            margin-top: 10px;
-            max-width: 700px;
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.9);
         }
-        /* Button styling */
-        .btn {
-            background-color: #ffcc00;
-            color: #0056b3;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .btn:hover {
-            background-color: #e6b800;
-        }
-        .content {
-            padding: 50px 20px;
-            background-color: white;
+        .hero .btn {
+            padding: 12px 30px;
+            font-size: 1.1rem;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            margin-top: -50px;
-            position: relative;
-            z-index: 2;
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            font-weight: 600;
+            border: none;
         }
-        footer {
-            background-color: #0056b3;
-            color: white;
-            padding: 20px 0;
+        .hero .btn:hover {
+            background-color: #e67e22;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: white;
+        }
+        .section-title {
             text-align: center;
-            margin-top: 50px;
+            margin-bottom: 50px;
         }
-        footer p {
-            margin: 0;
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark-color);
+            margin-bottom: 15px;
         }
-        @media (max-width: 768px) {
-            .nav-right ul li {
-                display: block;
-                margin: 10px 0;
-            }
-            .hero h1 {
-                font-size: 36px;
-            }
+        .section-title p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
         }
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .feature-card {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        /* Image Gallery */
+        .gallery {
+            padding: 60px 0;
+            background-color: #f1f5f9;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            height: 250px;
+        }
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* Notice Board */
+        .notice-section {
+            padding: 60px 0;
+            background-color: white;
+        }
+        .notice-board {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+        }
+        .notice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .notice-header h2 {
+            color: var(--dark-color);
+            font-size: 1.8rem;
+        }
+        .notice-content {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        .notice-item {
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #f8fafc;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        .notice-item:hover {
+            background-color: #f1f5f9;
+            transform: translateX(5px);
+        }
+        .notice-date {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            display: block;
+        }
+        .notice-text {
+            color: var(--text-color);
+        }
+        /* Profile Section */
+        .profile-section {
+            padding: 60px 0;
+            background-color: #f1f5f9;
+        }
+        .profile-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .profile-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .profile-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .profile-content {
+            flex: 1;
+        }
+        .profile-content h2 {
+            font-size: 2rem;
+            color: var(--dark-color);
+            margin-bottom: 20px;
+        }
+        .profile-content p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        /* Map Section */
+        .map-section {
+            padding: 60px 0;
+            background-color: white;
         }
         .map-container {
-            width: 100%;
             height: 500px;
-            margin: 20px auto;
-            text-align: center;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
         }
-        iframe {
+        .map-container iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
-        h1 {
-            text-align: center;
-            margin-top: 20px;
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
         }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
         }
-        .notice-board {
-            width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            border: 5px solid #333;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
         }
-        .notice-board h2 {
-            text-align: center;
-            color: #333;
-            font-size: 24px;
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        .footer-column p {
+            color: #cbd5e1;
             margin-bottom: 15px;
+            line-height: 1.7;
         }
-        /* Scrollable container for notices */
-        .notice-content {
-            max-height: 250px;
-            overflow-y: auto;
-            padding-right: 10px;
+        .footer-links {
+            list-style: none;
         }
-        .notice {
-            background-color: #e7f3fe;
-            border-left: 6px solid #2196F3;
-            padding: 10px;
-            margin-bottom: 15px;
-            display: block;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-        }
-        .notice-header {
+        .footer-links li {
             margin-bottom: 10px;
         }
-        .notice-header .date {
-            font-weight: bold;
-            color: #2196F3;
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .social-links a {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
             font-size: 0.9rem;
         }
-        .notice p {
-            margin: 0;
-            color: #333;
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .profile-container {
+                flex-direction: column;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
         }
-        .notice strong {
-            color: #000;
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .auth-buttons {
+                margin-top: 15px;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
     <nav class="navbar">
-        <div class="container">
-            <div class="nav-left">
-                <a href="{% url 'home' %}" class="nav-logo">
-                    <img src="{% static 'logo.png' %}" alt="Logo">
-                    Ideal Education
-                </a>
-            </div>
-            <div class="nav-right">
-                <ul>
-                    <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="{% url 'about' %}">About</a></li>
-                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
-                </ul>
-                <div class="auth-links">
-                    <a href="{% url 'login' %}">Sign In</a>
-                    <a href="{% url 'register' %}">Sign Up</a>
+        <div class="container nav-container">
+            <a href="{% url 'home' %}" class="nav-logo">
+                <img src="{% static 'logo.png' %}" alt="Ideal Education Logo">
+                Ideal Education
+            </a>
+            <div class="nav-links">
+                <a href="{% url 'home' %}" class="active">Home</a>
+                <a href="{% url 'about' %}">About</a>
+                <a href="{% url 'contact' %}">Contact</a>
+                <div class="auth-buttons">
+                    <a href="{% url 'login' %}" class="btn btn-outline">Sign In</a>
+                    <a href="{% url 'register' %}" class="btn btn-primary">Sign Up</a>
                 </div>
             </div>
         </div>
     </nav>
-    <div class="hero">
+
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="hero-content">
-            <h1>Welcome to Ideal Education</h1>
-            <p>Providing quality education to empower your future.</p>
-            <a href="{% url 'register' %}" class="btn">REGISTER</a>
+            <h1>Empowering Futures Through Quality Education</h1>
+            <p>Join Ideal Education to unlock your potential with our innovative learning programs and experienced faculty.</p>
+            <a href="{% url 'register' %}" class="btn">Get Started Today</a>
         </div>
-    </div>
-    <div class="container">
-        <div class="content">
-            {% block content %}
-            {% endblock %}
-        </div>
-    </div>
-    <div>
-        <p></p>
-    </div>
-    <div class="container">
-        <img src="{% static 'th.jpeg' %}" alt="Left Image" width="395" height="250">
-        <img src="{% static 'logo.jpg' %}" alt="Center Image" width="395" height="250">
-        <img src="{% static 'How-do-I-create-a-Computer-program.jpg' %}" alt="Right Image" width="395" height="250">
-    </div>
-    <div>
-        <p></p>
-    </div>
-<div class="notice-board">
-    <h2>Notice Board</h2>
-    <div class="notice-content">
-        <ol>
-            {% for notice in notices %}
-                <li class="notice">
-                    <div class="notice-header">
-                        <span class="date">{{ notice.date }}</span>
-                    </div>
-                    <p>{{ notice.notice }}</p>
-                </li>
-            {% endfor %}
-        </ol>
-    </div>
-</div>
-    <div style="display: flex; align-items: center; margin-bottom: 15px;">
-        <img src="{% static 'sandip.png' %}" alt="Left Corner Image" style="width: 200px; height: 250px; margin-right: 25px;">
-        <div>
-            {% block content2 %}
-            {% endblock %}
-        </div>
-        </div>
-        <div style="display: flex; align-items: center;">
-            <div style="flex: 1;">
-                {% block content3 %}
-                {% endblock %}
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Ideal Education?</h2>
+                <p>We provide comprehensive learning solutions designed to help students achieve academic excellence.</p>
             </div>
-            <img src="{% static 'logo.jpg' %}" alt="Right Corner Image" style="width: 200px; height: 250px; margin-left: 25px;">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>Expert Faculty</h3>
+                    <p>Learn from experienced educators who are passionate about teaching and student success.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Modern Curriculum</h3>
+                    <p>Up-to-date courses designed to meet the demands of today's competitive world.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Personalized Learning</h3>
+                    <p>Tailored educational approaches to match each student's unique learning style.</p>
+                </div>
+            </div>
         </div>
-    <h1>Location</h1>
-    <div class="map-container">
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.145737502188!2d87.20662501497386!3d22.90067898501401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f8cf95d63f1e23%3A0xfefc6818d7a2bda1!2sAmakonda%2C%20Simlapal%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1697988586485!5m2!1sen!2sin"
-            allowfullscreen="" loading="lazy">
-        </iframe>
-    </div>
+    </section>
+
+    <!-- Image Gallery -->
+    <section class="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Learning Environment</h2>
+                <p>Take a look at our facilities and vibrant learning community.</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="{% static 'th.jpeg' %}" alt="Classroom activities">
+                </div>
+                <div class="gallery-item">
+                    <img src="{% static 'logo.jpg' %}" alt="School building">
+                </div>
+                <div class="gallery-item">
+                    <img src="{% static 'How-do-I-create-a-Computer-program.jpg' %}" alt="Computer lab">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notice Board -->
+    <section class="notice-section">
+        <div class="container">
+            <div class="notice-board">
+                <div class="notice-header">
+                    <h2>Latest Announcements</h2>
+                    <span class="notice-date">Today: {% now "F j, Y" %}</span>
+                </div>
+                <div class="notice-content">
+                    {% for notice in notices %}
+                    <div class="notice-item">
+                        <span class="notice-date">{{ notice.date }}</span>
+                        <p class="notice-text">{{ notice.notice }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section 1 -->
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-image">
+                    <img src="{% static 'sandip.png' %}" alt="Director's Photo">
+                </div>
+                <div class="profile-content">
+                    <h2>Message from Our Director</h2>
+                    <p>At Ideal Education, we believe every student has unique potential waiting to be unlocked. Our mission is to provide an environment where curiosity is nurtured, talents are discovered, and excellence becomes a habit.</p>
+                    <p>With over 15 years of experience in education, our team is committed to delivering quality learning experiences that prepare students for the challenges of tomorrow.</p>
+                    <a href="{% url 'about' %}" class="btn btn-primary">Learn More About Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section 2 -->
+    <section class="profile-section" style="background-color: white;">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-content">
+                    <h2>Our Teaching Philosophy</h2>
+                    <p>Education is not just about imparting knowledge but about inspiring students to become lifelong learners. We focus on developing critical thinking, creativity, and problem-solving skills that go beyond textbooks.</p>
+                    <p>Our student-centered approach ensures that each learner receives the attention and guidance they need to succeed academically and personally.</p>
+                    <a href="{% url 'contact' %}" class="btn btn-outline">Contact Our Team</a>
+                </div>
+
+                <div class="profile-image">
+                    <img src="{% static 'logo.jpg' %}" alt="Teaching Philosophy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Visit Our Campus</h2>
+                <p>We're located in the heart of the community, easily accessible to students from all areas.</p>
+            </div>
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.145737502188!2d87.20662501497386!3d22.90067898501401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f8cf95d63f1e23%3A0xfefc6818d7a2bda1!2sAmakonda%2C%20Simlapal%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1697988586485!5m2!1sen!2sin"
+                    allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>Ideal Education</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <p>Ideal Education is committed to providing quality education that empowers students to achieve their full potential and become responsible global citizens.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                        <li><a href="#">Courses</a></li>
+                        <li><a href="#">Admissions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Amakonda, Simlapal, West Bengal</p>
+                    <p><i class="fas fa-phone"></i> +91 8391831592</p>
+                    <p><i class="fas fa-envelope"></i> info@idealeducation.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ideal Education. All Rights Reserved.</p>
+            </div>
+        </div>
     </footer>
 </body>
 </html>
